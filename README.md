@@ -1,3 +1,3 @@
 # chart
 
-[Preview](https://oufcena.github.io/chart/)
+[Preview](https://oufcena.github.io/chart/chart.html)
