@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My Skills</h1>
+
+<script>
+function chart0(bar ,JSX=document.body) {
+  if(!bar) {
+    bar = [
+      { name: 'HTML', per: '90%', bg: '#4CAF50' },
+      { name: 'CSS', per: '80%', bg: '#2196F3' },
+      { name: 'JavaScript', per: '65%', bg: '#f44336' },
+      { name: 'PHP', per: '60%', bg: '#808080' }
+    ];
+    bar.forEach(v => v.per = parseInt(v.per));
+  }
+
+  var CSS, JS, HTML='', that;
+  
+  CSS = [
+    `
+      position: relative;
+      resize: both;
+      overflow: hidden; 
+      border: 2px solid blue;
+      width: 25%;
+      height: 300px;
+      margin: 1rem 0;
+    `,
+    `
+      background-color: #ddd;
+      float: left;
+      width: 25%;
+      height: 100%;
+    `,
+    `
+      padding: 50px;
+      border: 2px solid black;
+      color: white;
+      position: relative;
+      box-sizing: border-box;
+    `,
+    `
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    `,
+    `
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    `
+  ];
+  
+  JS = [
+    `
+      onmouseover = "
+        this.style.cssText += \`
+          z-index: 1;
+        \`;
+      "
+      onmouseout = "
+        this.style.cssText += \`
+          z-index: 0;
+        \`;
+      "
+    `,
+    `
+      
+    `
+  ];
+  
+  HTML += `<section style="${CSS[0]}">`;
+  HTML += bar.map(v => {
+    return `
+    <div style="${CSS[1]}">
+      <div ${JS[0]} style="${CSS[2]}
+      top: ${100-v.per}%;
+      height: ${v.per}%;
+      background: ${v.bg};">
+        <span style="${CSS[3]}">${v.per}%</span>
+        <span style="${CSS[4]}">${v.name}</span>
+      </div>
+    </div>
+    `;
+  }).join('');
+  HTML += '</section>';
+  
+  JSX.innerHTML += HTML;
+} chart0();
+
+function replaceReverse(txt, x, y) {
+  var length, i, after; 
+  length = x.length;
+  i = txt.lastIndexOf(x);
+  after = txt.slice(0, i) + y + txt.slice(i+length);
+  return after;
+}
+
+function chart1(bar, JSX=document.body) {
+  if(!bar) {
+    bar = [
+      { name: 'HTML', per: '90%', bg: 'rgb(76, 175, 80' },
+      { name: 'CSS', per: '80%', bg: 'rgb(33, 150, 243' },
+      { name: 'JavaScript', per: '65%', bg: 'rgb(244, 67, 54' },
+      { name: 'PHP', per: '60%', bg: 'rgb(128, 128, 128' }
+    ];
+    bar.forEach(v => v.per = parseInt(v.per));
+  }
+
+  var CSS, JS, HTML='', that;
+  
+  CSS = [
+    `
+      display: grid;
+      grid: 
+      'item bar'
+      'item bar'/ min-content 1fr;
+      width: 100%;
+      background: #ddd;
+      border: 2px solid;
+      margin: 1rem 0;
+    `,
+    `
+      grid-area: item;
+    `,
+    `
+      padding: 10px 5px;
+      border: 2px solid;
+    `,
+    `
+      color: #fff;
+      background: #000;
+      text-align: center;
+    `,
+    `
+      grid-area: bar;
+      text-align: right;
+      color: #fff;
+    `
+  ];
+  
+  JS = [
+    `
+      onmouseover = "
+        var bg = 
+        replaceReverse(
+        this.style['background-color'], '0.5', 0.99);
+        this.style.cssText += \`
+          background: \${bg};
+        \`;
+      "
+      onmouseout = "
+        var bg = 
+        replaceReverse(
+        this.style['background-color'], '0.99', '0.5');
+        this.style.cssText += \`
+          background: \${bg};
+        \`;
+      "
+    `
+  ];
+  
+  HTML += `<section style="${CSS[0]}">`;
+    HTML += `<div style="${CSS[1]}">`;
+    HTML += bar.map(v => {
+      return `
+      <div style="${CSS[2]+CSS[3]}">${v.name}</div>
+      `;
+    }).join('');
+    HTML += '</div>';
+
+    HTML += `<div style="${CSS[4]}">`;
+    HTML += bar.map(v => {
+      
+      return `
+      <div ${JS[0]} style="${CSS[2]+CSS[4]}
+      width: ${v.per}%;
+      background: ${v.bg}, .5);
+      ">${v.per}%</div>
+      `;
+    }).join('');
+    HTML += '</div>';
+  HTML += '</section>';
+  
+  JSX.innerHTML += HTML;
+} chart1();
+</script>
+</body>
+</html>
